@@ -2,73 +2,154 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- ==== HEADER ==== -->
-     <h1>Resume Builder</h1>
-</hr>
-<!--  ==== FORM SECTION START ==== -->
-  <h1>Fill Your Details</h1>
 
-  <form>
+<!-- ===== PREMIUM HEADER WITH LOGO ===== -->
+<header class="navbar">
+    <div class="logo" id="mainLogo">
+        <i class="fas fa-robot logo-icon"></i>
+        <span class="logo-text">SmartResume AI</span>
+    </div>
+</header>
 
-    <!-- Personal Information -->
-     <fieldset>
+<hr>
+
+<h2>Fill Your Details</h2>
+
+<form id="resumeForm">
+
+    <!-- ===== Personal Information ===== -->
+    <fieldset>
         <legend>Personal Information</legend>
 
-     <label>Full Name:</label></br>
-     <input type="text" name="fullname"></br></br>
+        <label>Full Name:</label>
+        <input type="text" name="fullname">
 
-    <label>Email:</label></br>
-    <input type="text" name="email"></br></br>
+        <label>Email:</label>
+        <input type="email" name="email">
 
-    <label>Phone:</label></br>
-    <textarea name="address"></textarea></br></br>
+        <label>Phone:</label>
+        <input type="tel" name="phone">
 
-    <label>Upload Photo:</label><br>
-    <input type="file" name="photo" accept="image/*"></br></br>
-     </fieldset>
+        <label>LinkedIn:</label>
+        <input type="url" name="linkedin">
 
-    </br>
+        <label>GitHub:</label>
+        <input type="url" name="github">
 
-    <!-- Career Objective  -->
-     <fieldset>
+        <label>Upload Photo:</label>
+        <input type="file" name="photo" accept="image/*">
+    </fieldset>
+
+    <!-- ===== Career Objective ===== -->
+    <fieldset>
         <legend>Career Objective</legend>
-        <textarea name="objective" rows="4" cols="50"></textarea>
-     </fieldset></br>
 
-     <!-- Education  -->
-      <fieldset>
+        <textarea name="objective" rows="4" placeholder="Write your objective..."></textarea>
+        <button type="button" id="aiObjectiveBtn">Generate AI Objective</button>
+    </fieldset>
+
+    <!-- ===== Education ===== -->
+    <fieldset>
         <legend>Education</legend>
 
-        <label>Degree:</label></br>
-        <input type="text" name="college"></br></br>
+        <label>Degree:</label>
+        <input type="text" name="degree">
 
-        <label>College/University:</label></br>
-        <input type="text" name="year"></br></br>
+        <label>Branch:</label>
+        <input type="text" name="branch">
 
-        <label>Year:</label></br>
-        <input type="text" name="year"></br></br>
-      </fieldset> </br>
+        <label>College:</label>
+        <input type="text" name="college">
 
-      <!-- Skills -->
-       <fieldset>
+        <label>Start Year:</label>
+        <input type="text" name="gradstartYear">
+
+        <label>End Year:</label>
+        <input type="text" name="gradendYear">
+
+        <label>Percentage:</label>
+        <input type="number" name="gradpercentage" min="0" max="100" step="0.01">
+    </fieldset>
+
+    <!-- ===== Skills ===== -->
+    <fieldset>
         <legend>Skills</legend>
+        <textarea name="skills" rows="4" placeholder="Java, HTML, CSS, React..."></textarea>
+        <button type="button" id="improveSkillsBtn">Enhance Skills with AI</button>
+    </fieldset>
 
-        <textarea name="skills" rows="4" cols="50" placeholder="Example: Java, HTML, CSS, React"></textarea>
-       </fieldset></br>
+    <!-- ===== Projects ===== -->
+    <fieldset>
+        <legend>Projects</legend>
 
-       <!-- Projects -->
-        <fieldset>
-            <legend>Projects</legend>
+        <label>Project Title:</label>
+        <input type="text" name="projectTitle">
 
-            <label>p</label>
-        </fieldset>
-  </form>
-    
-</body>
+        <label>Project Link:</label>
+        <input type="url" name="projectLink">
+
+        <label>Project Description:</label>
+        <textarea name="projectDesc" rows="4"></textarea>
+    </fieldset>
+
+    <!-- ===== Experience ===== -->
+    <fieldset>
+        <legend>Work Experience</legend>
+
+        <label>Company:</label>
+        <input type="text" name="company">
+
+        <label>Role:</label>
+        <input type="text" name="role">
+
+        <label>Duration:</label>
+        <input type="text" name="duration">
+    </fieldset>
+
+    <br>
+
+    <button type="button" id="generationBtn">Generate Resume</button>
+    <button type="reset" id="resetBtn">Clear Form</button>
+    <button type="button" id="downloadBtn">Download PDF</button>
+    <button type="button" onclick="calculateResumeScore()">Check Resume Score</button>
+    <button type="button" onclick="getAISuggestions()">AI Suggestions</button>
+
+    <br><br>
+
+    <label>Target Job Role:</label>
+    <input type="text" id="jobRoleInput" placeholder="e.g. Java Developer">
+    <button type="button" onclick="optimizeForATS()">Optimize for ATS</button>
+
+</form>
+
+<br><br>
+
+<label>Select Resume Template:</label>
+<select id="templateSelector" onchange="applyTemplate()">
+    <option value="modern">Modern</option>
+    <option value="professional">Professional</option>
+    <option value="minimal">Minimal</option>
+</select>
+
+<hr>
+
+<h2>Resume Preview</h2>
+
+<div id="resumePreview">
+    <p>Your generated resume will appear here...</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="javascript.js"></script>
+
+</body>
 </html>
